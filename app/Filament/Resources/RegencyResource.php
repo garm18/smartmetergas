@@ -47,7 +47,7 @@ class RegencyResource extends Resource
                 Tables\Columns\TextColumn::make('id')
                     ->label('ID')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('province_id')
+                Tables\Columns\TextColumn::make('province.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),

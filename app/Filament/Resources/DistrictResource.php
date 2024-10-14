@@ -46,15 +46,17 @@ class DistrictResource extends Resource
                 Tables\Columns\TextColumn::make('id')
                     ->label('ID')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('regency_id')
+                Tables\Columns\TextColumn::make('regency.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Regency Name')
                     ->searchable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
