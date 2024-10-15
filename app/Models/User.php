@@ -3,9 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use App\Models\Province;
+use App\Models\Regency;
+use App\Models\District;
+use App\Models\Village;
 
 class User extends Authenticatable
 {
@@ -21,6 +26,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'group',
+        'noTelp',
+        'address',
+        'province_id',
+        'regency_id',
+        'district_id',
+        'village_id',
     ];
 
     /**
@@ -45,4 +57,22 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function province(): BelongsTo
+    {
+        return $this ->belongsTo(Province::class);
+    }
+    public function regency(): BelongsTo
+    {
+        return $this->belongsTo(Regency::class);
+    }
+    public function district(): BelongsTo
+    {
+        return $this ->belongsTo(District::class);
+    }
+    public function village(): BelongsTo
+    {
+        return $this ->belongsTo(Village::class);
+    }
+
 }

@@ -9,8 +9,10 @@
 
 namespace App\Models;
 
-use AzisHapidin\IndoRegion\Traits\RegencyTrait;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use AzisHapidin\IndoRegion\Traits\RegencyTrait;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -60,4 +62,9 @@ class Regency extends Model
     {
         return $this->hasMany(District::class);
     }
+
+    public function users():HasMany{
+        return $this->hasMany(User::class);
+    }
+
 }

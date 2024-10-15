@@ -8,7 +8,7 @@ use App\Models\Regency;
 use App\Models\Village;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
-use App\Models\Customer;
+use App\Models\User;
 use App\Models\District;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
@@ -23,7 +23,7 @@ use App\Filament\Resources\CustomerResource\RelationManagers;
 
 class CustomerResource extends Resource
 {
-    protected static ?string $model = Customer::class;
+    protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationLabel = 'Users';
@@ -63,6 +63,7 @@ class CustomerResource extends Resource
 
                 Forms\Components\Select::make('province_id')
                     ->relationship(name:'province',titleAttribute:'name')
+                    ->label('Province id')
                     ->searchable()
                     ->preload()
                     ->live()
