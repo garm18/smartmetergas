@@ -14,6 +14,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Illuminate\Support\Collection;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\CustomerResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -127,13 +128,13 @@ class CustomerResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('address')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('province_id')
+                Tables\Columns\TextColumn::make('province.name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('regency_id')
+                Tables\Columns\TextColumn::make('regency.name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('district_id')
+                Tables\Columns\TextColumn::make('district.name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('village_id')
+                Tables\Columns\TextColumn::make('village.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -145,8 +146,23 @@ class CustomerResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
-            ])
+                    SelectFilter::make('province')
+                        ->relationship('province', 'name')
+                        ->searchable()
+                        ->preload(),
+                    SelectFilter::make('regency')
+                        ->relationship('regency', 'name')
+                        ->searchable()
+                        ->preload(),
+                    SelectFilter::make('district')
+                        ->relationship('district', 'name')
+                        ->searchable()
+                        ->preload(),
+                    SelectFilter::make('village')
+                        ->relationship('village', 'name')
+                        ->searchable()
+                        ->preload(),
+                ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
